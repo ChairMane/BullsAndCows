@@ -1,0 +1,3 @@
+﻿  main.cpp
+c:\users\chris\documents\unreal projects\section_02\bullsandcows\bullcowgame\main.cpp(95): warning C4715: 'isPlaying': not all control paths return a value
+  BullCowGame.vcxproj -> C:\Users\Chris\Documents\Unreal Projects\Section_02\BullsAndCows\x64\Debug\BullCowGame.exe

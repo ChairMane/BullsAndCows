@@ -1,43 +1,41 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.h"
 
 void PrintIntro();
-string getGuess();
+void PlayGame();
+std::string getGuess();
+bool isPlaying();
+
+FBullCowGame BCGame;
+
 
 int main() {
 
-	PrintIntro();
-
-	int Turns = 1;
-
-	//While the amount of turns is less than 6, keep the guesses coming.
-	while (Turns < 6) {
-
-		//If this is your first guess, output this
-		if (Turns == 1) {
-
-			cout << "Your guess was: " << getGuess() << endl << endl;
-		}
-		//If this is your second, third or fourth guess, output this
-		else if(Turns >= 2 && Turns < 5) {
-
-			cout << "Your next guess is: " << getGuess() << endl << endl;
-		}
-		//If this is your final guess, output this
-		else if(Turns == 5){
-
-			cout << "Your final guess is: " << getGuess() << endl << endl;
-		}
-
-		//Keep incrementing the guesses, so we know when to end it
-		Turns++;
-		
-	}
+	PlayGame();
 
 
 	return 0;
+}
+
+/********************************************************
+*
+*		This function has the player enter guesses
+*
+*********************************************************/
+void PlayGame(){
+
+	int Turns = 1;
+
+	PrintIntro();
+
+	//While the amount of turns is less than 6, keep the guesses coming.
+	do {
+			std::cout << "Your guess was: " << getGuess() << std::endl << std::endl;
+			isPlaying();
+	}while(true);
+
+	
 }
 
 /********************************************************
@@ -51,8 +49,8 @@ void PrintIntro() {
 	constexpr int WORD_LENGTH = 5;
 
 	//Introduction to the game
-	cout << "Welcome to Bulls and Cows! Bulls and Cows is a fun word game!\n" << endl;
-	cout << "Can you guess the " << WORD_LENGTH << " letter isogram that I am thinking of?\n\n";
+	std::cout << "Welcome to Bulls and Cows! Bulls and Cows is a fun word game!\n" << std::endl;
+	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram that I am thinking of?\n\n";
 
 	return;
 }
@@ -62,14 +60,36 @@ void PrintIntro() {
 *		This function retrieves the players guess
 *
 *********************************************************/
-string getGuess() {
+std::string getGuess() {
 
 	//Variable for the players guess
-	string Guess;
+	std::string Guess;
 
 	//Asking the player for their guess
-	cout << "What is your guess for the word: ";
-	getline(cin, Guess);
+	std::cout << "What is your guess for the word: ";
+	std::getline(std::cin, Guess);
 
 	return Guess;
+}
+
+bool isPlaying(){
+
+	std::string response;
+
+	std::cout << "\nDo you want to continue playing?" << std::endl;
+	
+	std::getline(std::cin, response);
+
+	if (response[0] == 'y' || response[0] == 'Y') {
+		std::cout << "\nContinue playing.\n";
+		std::cout << std::endl << std::endl;
+		PlayGame();
+		return true;
+	}
+	else if (response[0] == 'n' || response[0] == 'N') {
+		std::cout << "\nDone playing!\n";
+		std::cout << std::endl << std::endl;
+		return false;
+	}
+	
 }
